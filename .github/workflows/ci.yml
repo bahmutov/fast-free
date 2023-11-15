@@ -1,0 +1,10 @@
+name: ci
+on: push
+jobs:
+  e2e:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      # Install npm dependencies, cache them correctly
+      # and run all Cypress tests
+      - uses: cypress-io/github-action@v6
