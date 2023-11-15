@@ -1,0 +1,10 @@
+name: split
+on:
+  # launch this workflow from GitHub Actions page
+  workflow_dispatch:
+jobs:
+  split:
+    # https://github.com/bahmutov/cypress-workflows
+    uses: bahmutov/cypress-workflows/.github/workflows/split.yml@v2
+    with:
+      nE2E: 2
