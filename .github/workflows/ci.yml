@@ -10,6 +10,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: cypress-io/github-action@v6
+        with:
+          # we don't need Cypress own runner summary
+          publish-summary: false
         env:
           SPLIT_FILE: timings.json
           SPLIT: ${{ strategy.job-total }}

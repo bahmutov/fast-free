@@ -1,0 +1,28 @@
+name: nightly
+on:
+  # run this workflow every night at 3am
+  schedule:
+    - cron: '0 3 * * *'
+  # or when the user triggers it from GitHub Actions page
+  workflow_dispatch:
+jobs:
+  e2e:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cypress-io/github-action@v6
+        with:
+          # we don't need Cypress own runner summary
+          publish-summary: false
+        env:
+          SPLIT_FILE: timings.json
+          SPLIT: 1
+          SPLIT_INDEX: 0
+      - name: Commit changed spec timings ⏱️
+        if: github.ref == 'refs/heads/main'
+        # https://github.com/stefanzweifel/git-auto-commit-action
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: Updated spec timings
+          branch: main
+          file_pattern: timings.json
