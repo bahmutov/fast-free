@@ -11,5 +11,6 @@ jobs:
       - uses: actions/checkout@v4
       - uses: cypress-io/github-action@v6
         env:
+          SPLIT_FILE: timings.json
           SPLIT: ${{ strategy.job-total }}
           SPLIT_INDEX: ${{ strategy.job-index }}
