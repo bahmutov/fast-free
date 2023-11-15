@@ -1,10 +1,17 @@
 name: ci
 on: push
 jobs:
-  e2e:
+  e2e-1:
     runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v4
-      # Install npm dependencies, cache them correctly
-      # and run all Cypress tests
       - uses: cypress-io/github-action@v6
+        with:
+          spec: cypress/e2e/spec-a.cy.js,cypress/e2e/spec-b.cy.js
+  e2e-2:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cypress-io/github-action@v6
+        with:
+          spec: cypress/e2e/spec-c.cy.js
