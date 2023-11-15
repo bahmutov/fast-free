@@ -1,19 +1,15 @@
 name: ci
 on: push
 jobs:
-  e2e-1:
+  e2e:
     runs-on: ubuntu-22.04
+    strategy:
+      fail-fast: false
+      matrix:
+        containers: [1, 2]
     steps:
       - uses: actions/checkout@v4
       - uses: cypress-io/github-action@v6
         env:
-          SPLIT: 2
-          SPLIT_INDEX: 0
-  e2e-2:
-    runs-on: ubuntu-22.04
-    steps:
-      - uses: actions/checkout@v4
-      - uses: cypress-io/github-action@v6
-        env:
-          SPLIT: 2
-          SPLIT_INDEX: 1
+          SPLIT: ${{ strategy.job-total }}
+          SPLIT_INDEX: ${{ strategy.job-index }}
